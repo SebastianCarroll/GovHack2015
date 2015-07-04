@@ -1,0 +1,12 @@
+.row {
+  width: 100%;
+  text-align: center; // center the content of the container
+}
+
+.block {
+  width: 200px; 
+  height: 200px;
+  display: inline-block; // display inline with abality to provide width/height
+}
+
+​

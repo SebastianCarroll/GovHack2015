@@ -2,7 +2,10 @@
   google.load("visualization", "1", {packages:["gauge"]});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
+    var height = 200
+    var width = 200
     
+    // ------------------------------------------------------------------------------------------
     // Opinion Setup ------------------
     var opinion_data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
@@ -10,7 +13,7 @@
     ]);
     
     var opinion_options = {
-      width: 400, height: 120,
+      width: width, height: height,
       redFrom: 0, redTo: 50,
       yellowFrom:50, yellowTo: 60,
       minorTicks: 5
@@ -25,6 +28,7 @@
       opinion_chart.draw(opinion_data, opinion_options);
     }, 3000);
     
+    // ------------------------------------------------------------------------------------------
     // Cost Setup ------------------
     var budget = 10000000;
     var cost_data = google.visualization.arrayToDataTable([
@@ -33,7 +37,7 @@
     ]);
     
     var cost_options = {
-      width: 400, height: 120,
+      width: width, height: height,
       redFrom: budget*0.9, redTo: budget,
       yellowFrom:budget*0.8, yellowTo: budget*0.9,
       minorTicks: 5, max: budget
@@ -49,6 +53,7 @@
       cost_chart.draw(cost_data, cost_options);
     }, 500);
     
+    // ------------------------------------------------------------------------------------------
     // Population Setup ------------------
     var population = 10000000;
     var pop_data = google.visualization.arrayToDataTable([
@@ -57,7 +62,7 @@
     ]);
     
     var pop_options = {
-      width: 400, height: 120,
+      width: width, height: height,
       redFrom: population*0.85, redTo: population,
       yellowFrom:population*0.6, yellowTo: population*0.85,
       minorTicks: 5, max: population
