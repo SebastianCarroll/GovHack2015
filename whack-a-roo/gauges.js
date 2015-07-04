@@ -1,4 +1,4 @@
-(function() {
+//(function() {
   google.load("visualization", "1", {packages:["gauge"]});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
@@ -77,5 +77,14 @@
       pop_data.setValue(0, 1, old_val + 1000);
       pop_chart.draw(pop_data, pop_options);
     }, 500);
+    
+
+  }   
+  
+  // ------------------------------------------------------------------------------------------
+  // Input Setup ------------------ 
+  function test(){
+    var userInput = document.getElementById("userInput").value;
+    document.getElementById("demo").innerHTML = userInput;
   }
-})();
+//})();
