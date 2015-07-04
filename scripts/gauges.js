@@ -26,7 +26,6 @@
     }, 3000);
     
     // Cost Setup ------------------
-    
     var budget = 10000000;
     var cost_data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
@@ -49,8 +48,6 @@
       cost_data.setValue(0, 1, old_val + 1000);
       cost_chart.draw(cost_data, cost_options);
     }, 500);
-    
-    
     
     // Population Setup ------------------
     var population = 10000000;
