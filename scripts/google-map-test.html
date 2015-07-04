@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script>
+google.load('visualization', '1', { 'packages': ['map'] });
+google.setOnLoadCallback(drawMap);
+
+function drawMap() {
+    var data = google.visualization.arrayToDataTable([
+            ['City', 'Population'],
+            ['Canberra', '']
+    ]);
+
+    var options = { showTip: true };
+
+    var map = new google.visualization.Map(document.getElementById('chart_div'));
+
+    map.draw(data, options);
+};
+</script>
+</head>
+<body>
+<div id="chart_div"></div>
+</body>
+</html>
