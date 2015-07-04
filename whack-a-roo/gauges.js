@@ -81,6 +81,29 @@
       pop_data.setValue(0, 1, old_val + 1000);
       pop_chart.draw(pop_data, pop_options);
     }, interval);
+    
+    
+    // ------------------------------------------------------------------------------------------
+    // Countdown timer ------------------
+    function startTimer(duration, display) {
+      var timer = duration, minutes, seconds;
+      setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+      }, 1000);
+    }
+
+    var fiveMinutes = 60 * 5;
+    startTimer(fiveMinutes, document.getElementById("time"));
   }   
   
   // ------------------------------------------------------------------------------------------
