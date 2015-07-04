@@ -68,8 +68,17 @@
     
     pop_chart.draw(pop_data, pop_options);
     
+    // ------------------------------------------
+    function increase_cull_number(){
+      roo_cull["dart"] =  document.getElementById("dart_num").value;
+      roo_cull["bullet"] =  document.getElementById("bullet_num").value;
+      document.getElementById("demo").innerHTML = JSON.stringify(roo_cull);
+    }
+    
     function updateGauges() {
-      cur_pop += 1000
+      increase_cull_number()
+      
+      cur_pop += 10000 - roo_cull["dart"] - roo_cull["bullet"] 
       pop_data.setValue(0, 1, cur_pop);
       pop_chart.draw(pop_data, pop_options);
       
@@ -104,12 +113,4 @@
     var fiveSeconds = 1;
     startTimer(fiveSeconds, document.getElementById("time"));
   }   
-  
-  // ------------------------------------------------------------------------------------------
-  // Input Setup ------------------ 
-  function increase_cull_number(){
-    roo_cull["dart"] =  document.getElementById("dart_num").value;
-    roo_cull["bullet"] =  document.getElementById("bullet_num").value;
-    document.getElementById("demo").innerHTML = JSON.stringify(roo_cull);
-  }
 //})();
