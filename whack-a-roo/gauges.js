@@ -8,9 +8,13 @@
     var height = 200;
     var width = 200;
     var interval = 5000;
+    
     var cur_opinion = 75;
     var cur_pop = 3000000;
     var cur_cost = 0;
+    
+    var fertile = cur_pop*0.6
+    var costs = { "dart": 10, "bullet": 5, "overhead": 1000}
     
     // ------------------------------------------------------------------------------------------
     // Opinion Setup ------------------
@@ -37,11 +41,12 @@
       ['Label', 'Value'],
       ['Cost', cur_cost]
     ]);
-    
+     var cost_med = 0.8;
+     var cost_high = 0.9;
     var cost_options = {
       width: width, height: height,
-      redFrom: budget*0.9, redTo: budget,
-      yellowFrom:budget*0.8, yellowTo: budget*0.9,
+      redFrom: budget*cost_high, redTo: budget,
+      yellowFrom:budget*cost_med, yellowTo: budget*cost_high,
       minorTicks: 5, max: budget
     };
     
@@ -57,10 +62,14 @@
       ['Population', cur_pop]
     ]);
     
+    var pop_high = 0.75;
+    var pop_low = 0.25;
+    
     var pop_options = {
       width: width, height: height,
-      redFrom: population*0.85, redTo: population,
-      yellowFrom:population*0.6, yellowTo: population*0.85,
+      redFrom: population*pop_high, redTo: population, 
+      //yellowFrom:population*0.6, yellowTo: population*0.85, yellow
+      greenFrom: 0, greenTo: population*pop_low, greenColor: "#DC3912",
       minorTicks: 5, max: population
     };
     
@@ -69,24 +78,38 @@
     pop_chart.draw(pop_data, pop_options);
     
     // ------------------------------------------
-    function increase_cull_number(){
+    function grab_user_input(){
       roo_cull["dart"] =  document.getElementById("dart_num").value;
       roo_cull["bullet"] =  document.getElementById("bullet_num").value;
       document.getElementById("demo").innerHTML = JSON.stringify(roo_cull);
     }
     
     function updateGauges() {
-      increase_cull_number()
-      
-      cur_pop += 10000 - roo_cull["dart"] - roo_cull["bullet"] 
+      grab_user_input()
+      var growth_rate = 1.05;
+      cur_pop = parseInt((cur_pop - roo_cull["bullet"]  - roo_cull["dart"])*growth_rate)
       pop_data.setValue(0, 1, cur_pop);
       pop_chart.draw(pop_data, pop_options);
       
-      cur_cost += 1000
+      cur_cost += costs["overhead"] + costs["dart"]*roo_cull["dart"] + costs["bullet"]*roo_cull["bullet"]
       cost_data.setValue(0, 1, cur_cost);
       cost_chart.draw(cost_data, cost_options);
       
-      opinion_data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+      if(cur_pop > population*pop_high || cur_pop < population*pop_low){
+	cur_opinion -= 2;
+      }
+      
+      if(cur_cost > budget*cost_med){
+	cur_opinion -= 1;
+	if (cur_cost > budget*cost_high){
+	  cur_opinion -= 1;
+	}
+      }
+      
+      cur_opinion += 1
+      
+      if(cur_opinion > 100) { cur_opinion = 100}
+      opinion_data.setValue(0, 1, cur_opinion);
       opinion_chart.draw(opinion_data, opinion_options);
     }
     
