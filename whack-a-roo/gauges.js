@@ -1,9 +1,13 @@
 //(function() {
   google.load("visualization", "1", {packages:["gauge"]});
   google.setOnLoadCallback(drawChart);
+  
+  var roo_cull = { "dart": 0, "bullet": 0} 
+  
   function drawChart() {
     var height = 200
     var width = 200
+    var interval = 3000
     
     // ------------------------------------------------------------------------------------------
     // Opinion Setup ------------------
@@ -26,7 +30,7 @@
     setInterval(function() {
       opinion_data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
       opinion_chart.draw(opinion_data, opinion_options);
-    }, 3000);
+    }, interval);
     
     // ------------------------------------------------------------------------------------------
     // Cost Setup ------------------
@@ -51,7 +55,7 @@
       old_val = cost_data.getValue(0,1);
       cost_data.setValue(0, 1, old_val + 1000);
       cost_chart.draw(cost_data, cost_options);
-    }, 500);
+    }, interval);
     
     // ------------------------------------------------------------------------------------------
     // Population Setup ------------------
@@ -76,15 +80,14 @@
       old_val = pop_data.getValue(0,1);
       pop_data.setValue(0, 1, old_val + 1000);
       pop_chart.draw(pop_data, pop_options);
-    }, 500);
-    
-
+    }, interval);
   }   
   
   // ------------------------------------------------------------------------------------------
   // Input Setup ------------------ 
-  function test(){
-    var userInput = document.getElementById("userInput").value;
-    document.getElementById("demo").innerHTML = userInput;
+  function increase_cull_number(){
+    roo_cull["dart"] =  document.getElementById("dart_num").value;
+    roo_cull["bullet"] =  document.getElementById("bullet_num").value;
+    document.getElementById("demo").innerHTML = JSON.stringify(roo_cull);
   }
 //})();
