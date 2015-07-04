@@ -5,15 +5,18 @@
   var roo_cull = { "dart": 0, "bullet": 0} 
   
   function drawChart() {
-    var height = 200
-    var width = 200
-    var interval = 3000
+    var height = 200;
+    var width = 200;
+    var interval = 5000;
+    var cur_opinion = 75;
+    var cur_pop = 3000000;
+    var cur_cost = 0;
     
     // ------------------------------------------------------------------------------------------
     // Opinion Setup ------------------
     var opinion_data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
-      ['Opinion', 75]
+      ['Opinion', cur_opinion]
     ]);
     
     var opinion_options = {
@@ -27,17 +30,12 @@
     
     opinion_chart.draw(opinion_data, opinion_options);
     
-    setInterval(function() {
-      opinion_data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-      opinion_chart.draw(opinion_data, opinion_options);
-    }, interval);
-    
     // ------------------------------------------------------------------------------------------
     // Cost Setup ------------------
     var budget = 10000000;
     var cost_data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
-      ['Cost', 0]
+      ['Cost', cur_cost]
     ]);
     
     var cost_options = {
@@ -51,18 +49,12 @@
     
     cost_chart.draw(cost_data, cost_options);
     
-    setInterval(function() {
-      old_val = cost_data.getValue(0,1);
-      cost_data.setValue(0, 1, old_val + 1000);
-      cost_chart.draw(cost_data, cost_options);
-    }, interval);
-    
     // ------------------------------------------------------------------------------------------
     // Population Setup ------------------
     var population = 10000000;
     var pop_data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
-      ['Population', 0]
+      ['Population', cur_pop]
     ]);
     
     var pop_options = {
@@ -76,12 +68,18 @@
     
     pop_chart.draw(pop_data, pop_options);
     
-    setInterval(function() {
-      old_val = pop_data.getValue(0,1);
-      pop_data.setValue(0, 1, old_val + 1000);
+    function updateGauges() {
+      cur_pop += 1000
+      pop_data.setValue(0, 1, cur_pop);
       pop_chart.draw(pop_data, pop_options);
-    }, interval);
-    
+      
+      cur_cost += 1000
+      cost_data.setValue(0, 1, cur_cost);
+      cost_chart.draw(cost_data, cost_options);
+      
+      opinion_data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+      opinion_chart.draw(opinion_data, opinion_options);
+    }
     
     // ------------------------------------------------------------------------------------------
     // Countdown timer ------------------
@@ -97,13 +95,14 @@
         display.textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-            timer = duration;
+	  updateGauges()
+          timer = duration;
         }
       }, 1000);
     }
 
-    var fiveMinutes = 60 * 5;
-    startTimer(fiveMinutes, document.getElementById("time"));
+    var fiveSeconds = 1;
+    startTimer(fiveSeconds, document.getElementById("time"));
   }   
   
   // ------------------------------------------------------------------------------------------
