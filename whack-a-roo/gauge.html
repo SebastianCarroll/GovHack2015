@@ -2,6 +2,7 @@
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="gauges.js"></script>
+    <script type="text/javascript" src="kangaroo_map.js"></script>
     <link rel="stylesheet" type="text/css" href="gauges.css">
   </head>
   <body>
@@ -11,15 +12,24 @@
     <div id="pop_chart_div" class="block"></div>
   </div>
     
-  <div>
-    <input type="text" id="dart_num"> Roos to make infertile</input>
+  <div class="row">
+    <p class="input_block">Darts</p>
+    <p class="input_block">Bullets</p>
   </div>
-    
-  <div>
-    <input type="text" id="bullet_num"> Roos to cull</input>
+  
+  <div class="row">
+    <input type="text" id="dart_num" class="input_block"></input>
+    <input type="text" id="bullet_num" class="input_block"></input>
   </div>
   
   <p id="time"></p> 
-  <p id="demo"></p>  
+  <p id="demo"></p> 
+  <div class="row">
+  <div id="map_div" class="map_block"></div>
+  </div>
   </body>
 </html>
+
+
+
+

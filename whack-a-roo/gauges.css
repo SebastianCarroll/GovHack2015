@@ -9,4 +9,16 @@
   display: inline-block; // display inline with abality to provide width/height
 }
 
+.input_block {
+  width: 200px; 
+  height: 20px;
+  display: inline-block; // display inline with abality to provide width/height
+}
+
+.map_block { 
+  width: 400px; 
+  height: 500px;
+  display: inline-block; // display inline with abality to provide width/height
+}
+
 ​
