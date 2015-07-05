@@ -5,6 +5,7 @@ loc_i = [18,19]
 date_i = 30
 CSV.foreach(ARGV[0]) do |row|
     loc = row.values_at(*loc_i).map(&:to_f)
+    next if loc[1] > 150
     begin
         d = Date.parse(row[date_i])
     rescue
