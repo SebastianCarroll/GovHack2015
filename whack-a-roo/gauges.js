@@ -81,7 +81,7 @@
     function grab_user_input(){
       roo_cull["dart"] =  document.getElementById("dart_num").value;
       roo_cull["bullet"] =  document.getElementById("bullet_num").value;
-      document.getElementById("demo").innerHTML = JSON.stringify(roo_cull);
+      //document.getElementById("demo").innerHTML = JSON.stringify(roo_cull);
     }
     
     function updateGauges() {
@@ -127,13 +127,16 @@
         display.textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-	  updateGauges()
           timer = duration;
         }
+        
+        if (timer%3 === 0){
+	  updateGauges()
+	}
       }, 1000);
     }
 
-    var fiveSeconds = 1;
-    startTimer(fiveSeconds, document.getElementById("time"));
+    var twnMins = 10*60;
+    startTimer(twnMins, document.getElementById("time"));
   }   
 //})();
